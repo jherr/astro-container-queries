@@ -1,0 +1,43 @@
+---
+import ResponsiveCard from "./ResponsiveCard.astro";
+
+import products from "../../products";
+
+const { id: selectedId, navOnSide, pagePrefix } = Astro.props;
+
+const selectedProduct = products.find(({ id }) => id === selectedId);
+---
+
+<div class="flex flex-row flex-wrap">
+  <div class={`flex @container ${
+    navOnSide ? "flex-col-reverse w-1/4" : "w-full flex-wrap"
+  }`}>
+    {products
+      .filter(({ id }) => id !== selectedId)
+      .map(({ name, src, id }) => (
+        <div
+          class={`p-1 w-full ${
+                  navOnSide ? "" : "@md:w-1/2 @3xl:w-1/4"
+                } @container`}
+          style={{ viewTransitionName: `products-${id}` }}
+        >
+          <a href={`/${pagePrefix}/${id}`}>
+            <ResponsiveCard src={src} alt={name}>
+              <h1 class="text-md font-bold">{name}</h1>
+            </ResponsiveCard>
+          </a>
+        </div>
+      ))}
+  </div>
+  <div class={navOnSide ? "w-3/4" : "w-full"}>
+    {selectedProduct && (
+      <div class="@container"
+        style={{ viewTransitionName: `products-${selectedProduct.id}` }}
+      >
+        <ResponsiveCard src={selectedProduct.src} alt={selectedProduct.name} active>
+          <h1 class="text-3xl font-bold">{selectedProduct.name}</h1>
+        </ResponsiveCard>
+      </div>
+    )}
+  </div>
+</div>

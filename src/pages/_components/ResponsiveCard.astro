@@ -1,0 +1,26 @@
+---
+import CldImage from './CldImage.astro';
+const { src, alt, active } = Astro.props;
+---
+
+<div class="flex flex-col @lg:flex-row">
+  <div class="@lg:w-1/2">
+    <CldImage
+      src={src}
+      alt={alt}
+      active={active}
+      className="visible @lg:hidden rounded-t-2xl"
+      />
+    <CldImage
+      width={900}
+      height={900}
+      src={src}
+      alt={alt}
+      active={active}
+      className="hidden @lg:block object-cover rounded-l-2xl"
+    />
+  </div>
+  <div class="bg-black text-white @lg:w-1/2 p-2 @lg:p-5 border-2 border-t-0 @lg:border-t-2 @lg:border-l-0 border-gray-900 rounded-b-2xl @lg:rounded-bl-none @lg:rounded-tr-2xl">
+    <slot />
+  </div>
+</div>

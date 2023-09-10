@@ -1,0 +1,23 @@
+---
+import Layout from "../../_components/Layout.astro";
+import ProductGrid from "../../_components/ProductGrid.astro";
+import products from "../../../products";
+
+const { id } = Astro.params;
+
+export function getStaticPaths() {
+  return products.map(({ id }) => ({ params: { id } }));
+}
+---
+
+<Layout title="Product list with nav on left">
+  <div class="text-white">
+    <a href="/">Home</a> |
+    <a href={`/top-nav/${id}`}>Switch To Top Navigation</a>
+  </div>
+  <ProductGrid
+    id={id}
+    navOnSide
+    pagePrefix="left-nav"
+  />
+</Layout>

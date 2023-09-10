@@ -1,0 +1,20 @@
+{
+  "name": "astro-container-queries",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^5.0.0",
+    "@cloudinary/url-gen": "^1.11.2",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "astro": "^3.0.12",
+    "open-props": "^1.5.15",
+    "tailwindcss": "^3.0.24"
+  }
+}

@@ -1,0 +1,30 @@
+---
+import { Cloudinary } from '@cloudinary/url-gen';
+import { pad } from '@cloudinary/url-gen/actions/resize';
+import { backgroundRemoval, sepia } from "@cloudinary/url-gen/actions/effect";
+import { generativeFill } from '@cloudinary/url-gen/qualifiers/background';
+
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: import.meta.env.CLOUDINARY_CLOUD_NAME
+  }
+});
+
+const { src, alt, width, height, crop, className, active } = {
+  width: 600,
+  height: 600,
+  crop: "fit",
+  ...Astro.props
+};
+
+const url = cld.image(src)
+  .effect(backgroundRemoval())
+  // .backgroundColor('rgb:111827')
+  .resize(pad().width(width).height(height).background(generativeFill()))
+  .effect(active ? "" : sepia())
+  .format('auto')
+  .quality('auto')
+  .toURL();
+---
+
+<img src={url} alt={alt} width={width} height={height} class={className} />
